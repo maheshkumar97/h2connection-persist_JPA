@@ -12,14 +12,16 @@ import javax.persistence.*;
 public class Address {
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int id;
+	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	private int addressid;
 	private String city;
 	private int zipcode;
 	private int phone;
 	
-	@OneToOne(mappedBy="address")
+	
+	//@JoinColumn(name="employeeid")
 	private Employee emp;
+	
 	
 	public Employee getEmp() {
 		return emp;
@@ -34,11 +36,11 @@ public class Address {
 	}
 
 	public int getId() {
-		return id;
+		return addressid;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.addressid = id;
 	}
 
 	public String getCity() {
@@ -67,7 +69,10 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", city=" + city + ", zipcode=" + zipcode + ", phone=" + phone + "]";
+		return "Address [addressid=" + addressid + ", city=" + city + ", zipcode=" + zipcode + ", phone=" + phone
+				+ ", emp=" + emp + "]";
 	}
+
+	
    
 }

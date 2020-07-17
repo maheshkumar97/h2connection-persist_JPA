@@ -1,9 +1,6 @@
-
-package com.demo.pojo;
+package com.demo;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.*;
 
 /**
@@ -13,59 +10,62 @@ import javax.persistence.*;
 @Entity
 @Table(name="employee")
 public class Employee {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int employeeid;
+	private long empId;
 	private String firstName;
 	private String lastName;
 	
-	@JoinColumn(name="addressid")
-	@OneToOne(cascade = CascadeType.PERSIST)
-	private Address address;
+	public Department getDept() {
+		return dept;
+	}
+
+	public void setDept(Department dept) {
+		this.dept = dept;
+	}
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Department dept;
 	
 	public Employee() {
 		super();
 	}
 
-	public int getEmployeeid() {
-		return employeeid;
+
+	public long getEmpId() {
+		return empId;
 	}
 
-	public void setEmployeeid(int employeeid) {
-		this.employeeid = employeeid;
+
+	public void setEmpId(long empId) {
+		this.empId = empId;
 	}
+
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 
 	public String getLastName() {
 		return lastName;
 	}
 
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
 	@Override
 	public String toString() {
-		return "Employee [employeeid=" + employeeid + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", address=" + address + "]";
+		return "Employee [empId=" + empId + ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
-
 	
-	
+   
 }
